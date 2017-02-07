@@ -61,7 +61,7 @@ class ClassycleDependencyUtilsSpec extends FlatSpec with Matchers {
   it should "get rev-deps of a class files" in {
     // NOTE: There is a cyclic dependency A->B->C->A
     // All classes depend on all other classes...
-    val classesDir = new File("target/scala-2.11/test-classes/ba/sake/hepek/core/testclasses") // TODO is there a better way?
+    val classesDir = new File("target/test-classes/ba/sake/hepek/core/testclasses") // TODO is there a better way?
     val revDeps = mapAsScala(reverseDependencies(new ju.ArrayList(ju.Arrays.asList(classesDir)), false)) // false means transitive deps
 
     revDeps.keySet.find(cv => cv2cn(cv).contains("ba.sake.hepek.core.testclasses.A")).map { a =>
