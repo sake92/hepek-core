@@ -6,7 +6,7 @@ Interfaces are **essential** to the sbt-hepek:
 - All objects that are meant to be rendered must extend `Renderable`
 - All resources that are either `Renderable` or are going to be placed in the `hepekTarget` folder manually must extend `RelativePath`
 
-The `ClassycleDependencyUtils` class has one handy method called `reverseDependencies: Map[AtomicVertex, Set[AtomicVertex]]`. Vertices here are actually Java bytecode classes.  
+The `ClassycleDependencyUtils` class has one handy method called `reverseDependencies` that returns `Map[AtomicVertex, Set[AtomicVertex]]`. Vertices here are actually Java bytecode classes.  
 It is used for optimized rendering of objects. When an object is changed and compiled, this method determines which other objects use it, so that they are rendered again too.
 
 Special thanks to [Classycle](http://classycle.sourceforge.net/)! :)
