@@ -15,9 +15,9 @@ libraryDependencies ++= Seq(
 
 compileOrder := CompileOrder.JavaThenScala
 
-// publish as Java library
 publishMavenStyle := true
 
+// publish as Java library
 crossPaths := false
 
 autoScalaLibrary := false
@@ -27,7 +27,7 @@ publishTo := {
   if (version.value.trim.endsWith("SNAPSHOT"))
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
 licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.html"))
