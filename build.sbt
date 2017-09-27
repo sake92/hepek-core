@@ -2,9 +2,9 @@ organization := "ba.sake"
 
 name := "hepek-core"
 
-version := "0.0.2-SNAPSHOT"
+version := "0.0.3"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.2"
 
 description := "Core of hepek"
 
