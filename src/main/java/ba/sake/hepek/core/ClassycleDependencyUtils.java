@@ -14,40 +14,13 @@ import classycle.graph.AtomicVertex;
  * Handy util methods for getting static reverse dependencies of classes. <br>
  * Uses Classycle Analyser internally. <br>
  * Contains only static methods.
- * 
+ *
  * @author Sake
  */
 public class ClassycleDependencyUtils {
 
     private ClassycleDependencyUtils() {
         throw new UnsupportedOperationException("Can't instantiate ClassycleDependencyUtils.");
-    }
-
-    /**
-     * Calculates static reverse dependencies of classes.
-     * 
-     * @param files
-     *            Files/Directories to process.
-     * @param directOnly
-     *            If true, direct reverse dependencies are calculated for each class. If false, transitive reverse
-     *            dependencies are calculated for each class.
-     * @return Reverse dependencies of classes.
-     */
-    public static Map<AtomicVertex, Set<AtomicVertex>> reverseDependencies(final List<File> files,
-            final boolean directOnly) {
-        final String[] filePaths = new String[files.size()];
-        for (int i = 0; i < files.size(); i++) {
-            File f = files.get(i);
-            filePaths[i] = f.getAbsolutePath();
-        }
-        final Analyser analyser = new Analyser((String[]) filePaths);
-        final AtomicVertex[] classVertices = analyser.getClassGraph();
-
-        if (directOnly) {
-            return getDirectRevDeps(classVertices);
-        } else {
-            return getTransitiveRevDeps(classVertices);
-        }
     }
 
     /* DIRECT REVERSE DEPENDENCIES, simple */
@@ -57,12 +30,12 @@ public class ClassycleDependencyUtils {
      * @return Direct reverse dependencies of classes.
      */
     static Map<AtomicVertex, Set<AtomicVertex>> getDirectRevDeps(final AtomicVertex[] classVertices) {
-        Map<AtomicVertex, Set<AtomicVertex>> directRevDeps = new HashMap<>(classVertices.length);
-        for (AtomicVertex classVertex : classVertices) {
-            int reverseDepsCount = classVertex.getNumberOfIncomingArcs();
-            Set<AtomicVertex> revDepsOfClass = new HashSet<>(reverseDepsCount);
+        final Map<AtomicVertex, Set<AtomicVertex>> directRevDeps = new HashMap<>(classVertices.length);
+        for (final AtomicVertex classVertex : classVertices) {
+            final int reverseDepsCount = classVertex.getNumberOfIncomingArcs();
+            final Set<AtomicVertex> revDepsOfClass = new HashSet<>(reverseDepsCount);
             for (int i = 0; i < reverseDepsCount; i++) {
-                AtomicVertex revDep = (AtomicVertex) classVertex.getTailVertex(i);
+                final AtomicVertex revDep = (AtomicVertex) classVertex.getTailVertex(i);
                 revDepsOfClass.add(revDep);
             }
             directRevDeps.put(classVertex, revDepsOfClass);
@@ -78,10 +51,10 @@ public class ClassycleDependencyUtils {
      *         Transitive means (direct deps) + (deps of deps) + (deps of deps of deps) + etc.
      */
     static Map<AtomicVertex, Set<AtomicVertex>> getTransitiveRevDeps(final AtomicVertex[] classVertices) {
-        Map<AtomicVertex, Set<AtomicVertex>> directDeps = getDirectRevDeps(classVertices);
-        Map<AtomicVertex, Set<AtomicVertex>> result = new HashMap<>(directDeps.keySet().size());
-        for (AtomicVertex v : directDeps.keySet()) {
-            Set<AtomicVertex> transitiveDeps = getTransitiveRevDepsForClass(v, directDeps, new HashSet<>());
+        final Map<AtomicVertex, Set<AtomicVertex>> directDeps = getDirectRevDeps(classVertices);
+        final Map<AtomicVertex, Set<AtomicVertex>> result = new HashMap<>(directDeps.keySet().size());
+        for (final AtomicVertex v : directDeps.keySet()) {
+            final Set<AtomicVertex> transitiveDeps = getTransitiveRevDepsForClass(v, directDeps, new HashSet<>());
             result.put(v, transitiveDeps);
         }
         return result;
@@ -89,7 +62,7 @@ public class ClassycleDependencyUtils {
 
     /**
      * Gets all dependencies of one class.
-     * 
+     *
      * @param className
      *            Class name for which we find rev-deps.
      * @param deps
@@ -106,9 +79,9 @@ public class ClassycleDependencyUtils {
         visited.addAll(classDeps);
         // new deps to visited recursively
         final Set<AtomicVertex> newTransitiveDeps = new HashSet<>();
-        for (AtomicVertex v : classDeps) {
+        for (final AtomicVertex v : classDeps) {
             if (!oldVisited.contains(v)) {
-                Set<AtomicVertex> transitiveDeps = getTransitiveRevDepsForClass(v, directDeps, visited);
+                final Set<AtomicVertex> transitiveDeps = getTransitiveRevDepsForClass(v, directDeps, visited);
                 newTransitiveDeps.addAll(transitiveDeps);
             }
         }
@@ -121,6 +94,33 @@ public class ClassycleDependencyUtils {
             }
         }
         return classDeps;
+    }
+
+    /**
+     * Calculates static reverse dependencies of classes.
+     *
+     * @param files
+     *            Files/Directories to process.
+     * @param directOnly
+     *            If true, direct reverse dependencies are calculated for each class. If false, transitive reverse
+     *            dependencies are calculated for each class.
+     * @return Reverse dependencies of classes.
+     */
+    public static Map<AtomicVertex, Set<AtomicVertex>> reverseDependencies(final List<File> files,
+            final boolean directOnly) {
+        final String[] filePaths = new String[files.size()];
+        for (int i = 0; i < files.size(); i++) {
+            final File f = files.get(i);
+            filePaths[i] = f.getAbsolutePath();
+        }
+        final Analyser analyser = new Analyser(filePaths);
+        final AtomicVertex[] classVertices = analyser.getClassGraph();
+
+        if (directOnly) {
+            return getDirectRevDeps(classVertices);
+        } else {
+            return getTransitiveRevDeps(classVertices);
+        }
     }
 
 }

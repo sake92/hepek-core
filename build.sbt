@@ -1,30 +1,26 @@
+
 organization := "ba.sake"
-
 name := "hepek-core"
-
-version := "0.0.3"
-
-scalaVersion := "2.12.2"
-
 description := "Core of hepek"
 
-libraryDependencies ++= Seq(
-  "org.specs2" % "classycle" % "1.4.3",
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
-)
+version := "0.0.4"
+
+scalaVersion := "2.12.3"
 
 compileOrder := CompileOrder.JavaThenScala
 
-publishMavenStyle := true
+libraryDependencies ++= Seq(
+  "ba.sake" % "hepek-classycle" % "0.0.1",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+)
 
-// publish as Java library
-crossPaths := false
-
-autoScalaLibrary := false
+publishMavenStyle := true   // publish as Java library
+crossPaths := false         // isn't Scala
+autoScalaLibrary := false   // don't need Scala to compile
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"
-  if (version.value.trim.endsWith("SNAPSHOT"))
+  if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
@@ -36,4 +32,4 @@ developers += Developer("sake92", "Sakib Hadžiavdić", "sakib@sake.ba", url("ht
 
 scmInfo := Some(ScmInfo(url("https://github.com/sake92/hepek-core"), "scm:git:git@github.com:sake92/hepek-core.git"))
 
-homepage := Some(url("http://sake.ba")) // url in maven
+homepage := Some(url("http://sake.ba"))
