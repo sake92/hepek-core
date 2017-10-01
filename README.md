@@ -1,4 +1,22 @@
 # hepek-core
+# Usage
+- Add to deps:
+```scala
+libraryDependencies ++= Seq(
+  "ba.sake" % "hepek-core" % "0.0.4"
+)
+```
+- Code:
+```scala
+val filesJavaList = new java.util.ArrayList[File]()
+filesJavaList.add(new File("myClass.class"))
+filesJavaList.add(new File("myClassesFolder"))
+
+// java.util.Map[AtomicVertex, Set[AtomicVertex]]
+val classRevDeps = ClassycleDependencyUtils.reverseDependencies(filesJavaList, false)
+```
+
+# What is it?
 Core of the [sbt-hepek](https://github.com/sake92/sbt-hepek).  
 This project contains two interfaces ([`Renderable`](https://github.com/sake92/hepek-core/blob/master/src/main/java/ba/sake/hepek/core/Renderable.java) and [`RelativePath`](https://github.com/sake92/hepek-core/blob/master/src/main/java/ba/sake/hepek/core/RelativePath.java)) and a single helper class ([`ClassycleDependencyUtils`](https://github.com/sake92/hepek-core/blob/master/src/main/java/ba/sake/hepek/core/ClassycleDependencyUtils.java)). 
 
