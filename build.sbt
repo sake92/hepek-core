@@ -3,15 +3,15 @@ organization := "ba.sake"
 name := "hepek-core"
 description := "Core of hepek"
 
-version := "0.0.4"
+version := "0.1.0-SNAPSHOT"
 
-scalaVersion := "2.12.3"
+scalaVersion := "2.12.4"
 
 compileOrder := CompileOrder.JavaThenScala
 
 libraryDependencies ++= Seq(
   "ba.sake" % "hepek-classycle" % "0.0.1",
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 )
 
 publishMavenStyle := true   // publish as Java library

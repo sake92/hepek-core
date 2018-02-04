@@ -1,13 +1,14 @@
 package ba.sake.hepek.core;
 
 /**
- * Implementing classes should be rendered to a file specified by {@link RelativePath#relPath()} method.
+ * Implementing classes are rendered to a file in target folder, <br>
+ * specified by {@link RelativePath#relPath()} method.
  *
  * @author Sake
  */
-public interface Renderable extends RelativePath {
+public abstract class Renderable extends RelativePath {
 
     /** @return Content of this resource. */
-    String render();
+    public abstract String render();
 
 }
