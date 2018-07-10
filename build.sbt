@@ -3,7 +3,7 @@ organization := "ba.sake"
 name := "hepek-core"
 description := "Core of hepek"
 
-version := "0.1.0-SNAPSHOT"
+version := "0.1.2-SNAPSHOT"
 
 scalaVersion := "2.12.4"
 
