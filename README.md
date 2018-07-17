@@ -6,7 +6,7 @@
 - Add to deps:
 ```scala
 libraryDependencies ++= Seq(
-  "ba.sake" % "hepek-core" % latestVersion
+  "ba.sake" % "hepek-core" % "0.1.1"
 )
 ```
 - Code:
