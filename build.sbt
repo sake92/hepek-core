@@ -3,9 +3,9 @@ organization := "ba.sake"
 name := "hepek-core"
 description := "Core of hepek"
 
-version := "0.1.2-SNAPSHOT"
+version := "0.2.0"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.10"
 
 compileOrder := CompileOrder.JavaThenScala
 

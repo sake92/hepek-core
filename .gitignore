@@ -24,4 +24,7 @@ project/project/
 
 bin/
 
+.idea/
 
+.bloop/
+.metals/
