@@ -9,15 +9,6 @@ libraryDependencies ++= Seq(
   "ba.sake" % "hepek-core" % "0.2.0"
 )
 ```
-- Code:
-```scala
-val filesJavaList = new java.util.ArrayList[File]()
-filesJavaList.add(new File("myClass.class"))
-filesJavaList.add(new File("myClassesFolder"))
-
-// java.util.Map[AtomicVertex, Set[AtomicVertex]]
-val classRevDeps = ClassycleDependencyUtils.reverseDependencies(filesJavaList, false)
-```
 
 
 # What is it?
