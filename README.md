@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
 )
 ```
 
+
 # What is it?
 Core of the [sbt-hepek](https://github.com/sake92/sbt-hepek).
 This project contains two interfaces ([`Renderable`](https://github.com/sake92/hepek-core/blob/master/src/main/java/ba/sake/hepek/core/Renderable.java)
