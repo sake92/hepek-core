@@ -14,17 +14,13 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 )
 
-publishMavenStyle := true   // publish as Java library
+githubOwner := "sake92"
+githubRepository := "hepek-core"
+publishMavenStyle := true   // mandatory for GH packages!
+githubTokenSource := TokenSource.Environment("MY_GITHUB_TOKEN")
+
 crossPaths := false         // isn't Scala
 autoScalaLibrary := false   // don't need Scala to compile
-
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
 
 licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.html"))
 
